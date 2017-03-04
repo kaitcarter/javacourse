@@ -1,4 +1,4 @@
-package helloworld;
+ckage helloworld;
 
 import com.basho.riak.client.api.RiakClient;
 import com.basho.riak.client.api.cap.Quorum;
@@ -40,18 +40,16 @@ public class HelloWorld {
     public static void riak() throws UnknownHostException, ExecutionException, InterruptedException{
         System.out.println("Inside riak class");
         
-        RiakClient client = RiakClient.newClient("192.168.99.14","192.168.99.15");
+        RiakClient client = RiakClient.newClient("192.168.0.15");
         
-        Namespace ns = new Namespace("default", "my_bucket");
-        Location location = new Location(ns, "my_key");
+        Namespace ns = new Namespace("default", "java_code");
+        Location location = new Location(ns, "java_key");
         RiakObject riakObject = new RiakObject();
-        riakObject.setValue(BinaryValue.create("my_value"));
+        riakObject.setValue(BinaryValue.create("java_value"));
         StoreValue store;
         store = new StoreValue.Builder(riakObject)
               .withLocation(location)
               .withOption(Option.W, new Quorum(3)).build();
         client.execute(store);
-        
-    }
     
-}
+    }
